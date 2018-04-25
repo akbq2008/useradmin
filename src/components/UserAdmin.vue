@@ -1,6 +1,6 @@
 <template>
 	<div class="useradmin">
-		<el-container style="width: 1200px;margin:0 auto;border: 1px solid #eee;">
+		<el-container style="width: 1200px;margin:0 auto;border: 1px solid #eee;" ref="contain">
 			<el-main>
 				<el-table :data="tableData" height="600" stripe align="center" :default-sort="{prop: 'id', order: 'descending'}">
 					<el-table-column prop="id" label="序号" width="140" sortable>
@@ -13,9 +13,17 @@
 					</el-table-column>
 					<el-table-column prop="phone" label="手机号码" sortable>
 					</el-table-column>
+					<el-table-column label="操作">
+						<template slot-scope="scope">
+							<el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+							<!--	<router-link to="/UserAdmin/edit">编辑</router-link>-->
+							<el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+						</template>
+					</el-table-column>
 				</el-table>
 			</el-main>
 		</el-container>
+		<router-view></router-view>
 	</div>
 </template>
 <style>
@@ -88,6 +96,19 @@
 						}
 						this.tableData = dataArr;
 					})
+			},
+			handleEdit(index, row) {
+				var _this = this;
+				var con = _this.$refs.contain.$el;
+				console.log(con)
+				con.style.display = "none";
+				_this.$router.push({
+					path: '/userAdmin/edit'
+				});
+
+			},
+			handleDelete(index, row) {
+				console.log(index, row);
 			}
 		}
 
