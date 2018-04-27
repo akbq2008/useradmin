@@ -1,7 +1,7 @@
 <template>
 	<div class="useradmin">
 		<el-container ref="contain">
-			<el-table :data="tableData" tooltip-effect="dark" height="600" stripe align="center" :default-sort="{prop: 'id', order: 'ascending'}">
+			<el-table     v-loading="loading" :data="tableData" tooltip-effect="dark" height="600" stripe align="center" :default-sort="{prop: 'id', order: 'ascending'}">
 				<el-table-column prop="id" label="序号" width="140" sortable>
 				</el-table-column>
 				<el-table-column show-overflow-tooltip prop="name" label="姓名" width="120" sortable>
@@ -28,7 +28,8 @@
 	export default {
 		data() {
 			return {
-				tableData: []
+				tableData: [],
+				loading: true
 			}
 		},
 		mounted() {
@@ -59,6 +60,7 @@
 							dataArr[i] = obj;
 						}
 						this.tableData = dataArr;
+						this.loading=false;
 					})
 			},
 			handleDelete(index, row) {

@@ -1,15 +1,14 @@
 {
   "users": [
     {
-      "id": 1,
       "name": "Leanne Graham",
       "username": "Bret",
-      "email": "Sincere@april.biz",
       "phone": "18236615050",
       "address": {
         "prov": "浙江",
         "city": "杭州"
-      }
+      },
+      "id": 1
     },
     {
       "id": 2,

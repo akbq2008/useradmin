@@ -132,6 +132,13 @@
 				}
 				_this.$refs.form.validate((valid) => {
 					if(valid) {
+						var loading = this.$loading({
+							lock: true,
+							text: '添加成功！',
+							spinner: 'el-icon-loading',
+							fullscreen: true,
+							background: 'rgba(0, 0, 0, 0.7)'
+						});
 						_this.$http.post("http://localhost:3000/users", {
 							name: _this.formLabelAlign.name,
 							username: _this.formLabelAlign.username,
@@ -139,9 +146,11 @@
 							address: loc
 						}).then(data => {
 							if(data.status == 201) {
-								_this.$alert('添加成功！');
-								_this.$router.push({
-									path: '/UserAdmin'
+								this.$nextTick(() => {
+									loading.close();
+									_this.$router.push({
+										path: '/UserAdmin'
+									});
 								});
 							}
 						});
