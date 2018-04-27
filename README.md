@@ -1,21 +1,22 @@
-# useradmin
+#简单的后台用户管理系统demo
+#传统的增删改查 用户，模糊匹配。结合element-ui  实现了表单验证，表单分页效果,数据加载loading和表单提交loading,。
 
-> A Vue.js project
 
-## Build Setup
+#数据接口  json-server 模拟
 
-``` bash
-# install dependencies
-npm install
+#全局安装json-server
+cnpm install -g json-server
 
-# serve with hot reload at localhost:8080
-npm run dev
 
-# build for production with minification
-npm run build
+#运行  $json-server --watch db.json  这里已经在package.json配置过直接 cnpm run json或者 npm run json即可
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+#数据接口地址 http://localhost:3000/users
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+#使用了 axios
+
+cnpm install axios
+
+
+
+
+
