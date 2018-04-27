@@ -1,31 +1,29 @@
 <template>
 	<div class="add">
 		<h1>添加用户</h1>
-		<el-container>
-			<el-form ref="form" size="medium " :rules="rules" label-width="80px" :label-position="labelPosition" :model="formLabelAlign">
-				<el-form-item label="姓名" prop="name">
-					<el-input clearable v-model="formLabelAlign.name" placeholder="请输入姓名"></el-input>
-				</el-form-item>
-				<el-form-item label="用户名" prop="username">
-					<el-input clearable v-model="formLabelAlign.username" placeholder="请输入用户名"></el-input>
-				</el-form-item>
-				<el-form-item label="地址" prop="address">
-					<el-select v-model="formLabelAlign.address.prov" placeholder="请选择活动区域" @change="cityFun">
-						<el-option :value="item.p" v-for="(item,index) in provList" :key="index"></el-option>
-					</el-select>
-					<el-select v-model="formLabelAlign.address.city" placeholder="请选择活动区域">
-						<el-option :value="item.n" v-for="(item,index) in cityList" :key="index"></el-option>
-					</el-select>
-				</el-form-item>
-				<el-form-item label="手机号码" prop="phone">
-					<el-input clearable v-model="formLabelAlign.phone" placeholder="请输入手机号码"></el-input>
-				</el-form-item>
-				<el-form-item>
-					<el-button type="primary" @click="onSubmit(form)">添加</el-button>
-					<el-button type="primary" @click="$router.go(-1)">返回</el-button>
-				</el-form-item>
-			</el-form>
-		</el-container>
+		<el-form ref="form" size="medium " :rules="rules" label-width="80px" :label-position="labelPosition" :model="formLabelAlign">
+			<el-form-item label="姓名" prop="name">
+				<el-input clearable v-model="formLabelAlign.name" placeholder="请输入姓名"></el-input>
+			</el-form-item>
+			<el-form-item label="用户名" prop="username">
+				<el-input clearable v-model="formLabelAlign.username" placeholder="请输入用户名"></el-input>
+			</el-form-item>
+			<el-form-item label="地址" prop="address">
+				<el-select v-model="formLabelAlign.address.prov" placeholder="请选择活动区域" @change="cityFun">
+					<el-option :value="item.p" v-for="(item,index) in provList" :key="index"></el-option>
+				</el-select>
+				<el-select v-model="formLabelAlign.address.city" placeholder="请选择活动区域">
+					<el-option :value="item.n" v-for="(item,index) in cityList" :key="index"></el-option>
+				</el-select>
+			</el-form-item>
+			<el-form-item label="手机号码" prop="phone">
+				<el-input clearable v-model="formLabelAlign.phone" placeholder="请输入手机号码"></el-input>
+			</el-form-item>
+			<el-form-item>
+				<el-button type="primary" @click="onSubmit(form)">添加</el-button>
+				<el-button type="primary" @click="$router.go(-1)">返回</el-button>
+			</el-form-item>
+		</el-form>
 	</div>
 </template>
 
@@ -178,7 +176,7 @@
 
 <style scoped>
 	.add h1 {
-		margin-top: 100px;
+		margin-top: 50px;
 	}
 	
 	.el-form {

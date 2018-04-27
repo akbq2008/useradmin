@@ -1,7 +1,12 @@
 <template>
 	<div class="useradmin">
 		<el-container ref="contain">
-			<el-table     v-loading="loading" :data="tableData" tooltip-effect="dark" height="600" stripe align="center" :default-sort="{prop: 'id', order: 'ascending'}">
+			<el-header>
+				<!--<input type="text" @keydown="show"/>-->
+				<el-input clearable placeholder="请输入内容" prefix-icon="el-icon-search" v-model="search" @keyup.native="show">
+				</el-input>
+			</el-header>
+			<el-table v-loading="loading" :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)" tooltip-effect="dark" stripe align="center" :default-sort="{prop: 'id', order: 'ascending'}">
 				<el-table-column prop="id" label="序号" width="140" sortable>
 				</el-table-column>
 				<el-table-column show-overflow-tooltip prop="name" label="姓名" width="120" sortable>
@@ -19,6 +24,8 @@
 					</template>
 				</el-table-column>
 			</el-table>
+			<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[1, 2, 5, 10]" :page-size="pagesize" layout="total, sizes, prev, pager, next, jumper" :total="tableData.length">
+			</el-pagination>
 		</el-container>
 		<router-view></router-view>
 	</div>
@@ -28,8 +35,12 @@
 	export default {
 		data() {
 			return {
-				tableData: [],
-				loading: true
+				tableData: [], //表格显示的数据
+				dataArr: [], //获取的数据源
+				currentPage: 1, //当前页
+				pagesize: 5, //页的尺寸
+				loading: true, //默认加载loading
+				search: ""
 			}
 		},
 		mounted() {
@@ -41,6 +52,12 @@
 			_this.init();
 		},
 		methods: {
+			handleSizeChange: function(size) {
+				this.pagesize = size;
+			},
+			handleCurrentChange: function(currentPage) {
+				this.currentPage = currentPage;
+			},
 			init() {
 				fetch("http://localhost:3000/users", {
 						method: "get"
@@ -48,8 +65,7 @@
 						return result.json();
 					})
 					.then(data => {
-						var dataArr = [],
-							len = data.length;
+						var len = data.length;
 						for(var i = 0; i < len; i++) {
 							var obj = {};
 							obj.username = data[i].username;
@@ -57,11 +73,22 @@
 							obj.id = data[i].id;
 							obj.phone = data[i].phone;
 							obj.address = data[i].address.prov + " " + data[i].address.city;
-							dataArr[i] = obj;
+							this.dataArr[i] = obj;
 						}
-						this.tableData = dataArr;
-						this.loading=false;
+						this.tableData = this.dataArr;
+						this.loading = false;
 					})
+			},
+			show() {
+				var searchInput = this.search;
+				if(searchInput) {
+					var back = this.dataArr.filter((item, index) => {
+						return item.name.match(searchInput)
+					});
+					this.tableData = back; //匹配输入框
+				} else {
+					this.tableData = this.dataArr; //清空时赋初始值
+				}
 			},
 			handleDelete(index, row) {
 				this.$confirm("请确认是否要删除?", '提示', {

@@ -1,7 +1,7 @@
 <template>
 	<div class="add">
 		<h1>编辑</h1>
-		<el-container>
+		<!--<el-container>-->
 			<el-form v-loading="loading" ref="form" size="medium " :rules="rules" label-width="80px" :label-position="labelPosition" :model="formLabelAlign">
 				<el-form-item label="姓名" prop="name">
 					<el-input clearable v-model="formLabelAlign.name" placeholder="请输入姓名"></el-input>
@@ -25,7 +25,7 @@
 					<el-button type="primary" @click="$router.go(-1)">返回</el-button>
 				</el-form-item>
 			</el-form>
-		</el-container>
+		<!--</el-container>-->
 	</div>
 </template>
 
@@ -199,7 +199,7 @@
 
 <style scoped>
 	.add h1 {
-		margin-top: 100px;
+		margin-top: 50px;
 	}
 	
 	.el-form {
