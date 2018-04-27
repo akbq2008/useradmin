@@ -22,6 +22,7 @@
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" @click="onSubmit(form)">添加</el-button>
+					<el-button type="primary" @click="$router.go(-1)">返回</el-button>
 				</el-form-item>
 			</el-form>
 		</el-container>
@@ -112,7 +113,9 @@
 			onSubmit(formName) {
 				var _this = this;
 				var loc = {
-					street: _this.formLabelAlign.address.prov + " " + _this.formLabelAlign.address.city
+					"prov": _this.formLabelAlign.address.prov,
+					"city": _this.formLabelAlign.address.city
+
 				};
 				if(_this.formLabelAlign.name == "") {
 					_this.$alert('请输入姓名！');

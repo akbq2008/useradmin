@@ -26,16 +26,17 @@ const router = new VueRouter({
 			component: Home
 		},
 		{
-			path: "/about",
-			component: About
-		}, {
 			path: "/userAdmin",
 			component: UserAdmin,
-			children: [{
-				path: "edit",
-				name: 'edit',
-				component: Edit
-			}]
+		},
+		{
+			path: "/userAdmin/:id",
+			component: Edit
+
+		},
+		{
+			path: "/about",
+			component: About
 		},
 		{
 			path: "/add",
